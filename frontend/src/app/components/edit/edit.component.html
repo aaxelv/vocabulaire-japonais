@@ -1,0 +1,38 @@
+<!-- Il faut ici changer la note de frais sélectionné par l'utilisateur  actuellement connecté, on peut tout modifier, dont les objections, à l'exception de : status et justification qui sont réservés aux admins 
+-->
+
+<div class="container">
+	<br>
+	<mat-card>
+		<button mat-raised-button class= 'btn btn-danger' (click)= 'disconnect()'> Disconnect</button>
+		<section class = 'mat-typography'>
+			<h3>Update Issue</h3>
+		</section>
+		<mat-divider></mat-divider>
+		<br>
+		<form [formGroup] = "updateForm" class = "edit-form">
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="Issue Title" formControlName="title" #title>
+			</mat-form-field>
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="Date" formControlName="date" #date>
+			</mat-form-field>
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="Montant" formControlName="ammount" #ammount>
+			</mat-form-field>
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="Devise" formControlName="devise" #devise>
+			</mat-form-field>
+			<mat-form-field class = 'field-full-width'>
+				<textarea matInput placeholder="Description" formControlName="description" #description></textarea>
+			</mat-form-field>
+			<mat-form-field class = 'field-full-width'>
+				<textarea matInput placeholder="Objection" formControlName="objection" #objection></textarea>
+			</mat-form-field>
+			<mat-divider></mat-divider>
+			<br><br>
+			<button mat-raised-button class="btn btn-primary" routerLink= "/list">Back</button>
+			<button type = "submit" (click) = "updateIssue(title.value,date.value,ammount.value,devise.value,description.value,objection.value)" [disabled] = "updateForm.pristine || updateForm.invalid" mat-raised-button class="btn btn-success">Save</button>
+		</form>
+	</mat-card>
+</div>

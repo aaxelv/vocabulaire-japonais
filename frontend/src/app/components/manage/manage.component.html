@@ -1,0 +1,28 @@
+<!-- Il faut ici afficher le comptes sélectionné par le superadmin pour etre modifié, on choisit d'afficher toutes les infomations du compte.-->
+
+<div class="container">
+	<br>
+	<mat-card>
+		<button mat-raised-button class= 'btn btn-danger' (click)= 'disconnect()'> Disconnect</button>
+		<section class = 'mat-typography'>
+			<h3>Modifier un compte</h3>
+		</section>
+		<mat-divider></mat-divider>
+		<br>
+		<form [formGroup] = "updateForm" class = "edit-form">
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="Username" formControlName="username" #username>
+			</mat-form-field>
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="class" formControlName="class" #class>
+			</mat-form-field>
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="connection" formControlName="connection" #connection>
+			</mat-form-field>
+			<mat-divider></mat-divider>
+			<br><br>
+			<button mat-raised-button class="btn btn-primary" routerLink= "/superadmin">Back</button>
+			<button type = "submit" (click) = "updateAccount(username.value,class.value,connection.value)" [disabled] = "updateForm.pristine || updateForm.invalid" mat-raised-button class="btn btn-success">Save</button>
+		</form>
+	</mat-card>
+</div>

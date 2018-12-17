@@ -1,0 +1,30 @@
+<div>
+			<mat-card [hidden] = "n>12">
+				<mat-card-title>Français</mat-card-title>
+				<mat-card-content>{{voc.french}} </mat-card-content>
+			</mat-card >
+			<mat-card [hidden] = "n<=12">
+				<mat-card-title>Japonais</mat-card-title>
+				<mat-card-content>{{voc.japanese}} </mat-card-content>
+			</mat-card>
+			<mat-card>
+				<mat-card-title>Leçon</mat-card-title>
+				<mat-card-content>{{voc.lesson}} </mat-card-content>
+			</mat-card>
+			<mat-card>
+				<mat-card-title>Mémo 1</mat-card-title>
+				<mat-card-content>{{voc.memo1}} </mat-card-content>
+			</mat-card>
+			<mat-card>
+				<mat-card-title>Mémo perso</mat-card-title>
+				<mat-card-content>{{voc.memo2}} </mat-card-content>
+			</mat-card>
+		<form [formGroup] = "createForm" class = "edit-form">
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="Traduction" formControlName="traduction" #traduction>
+			</mat-form-field>
+			<br><br>
+			<button mat-raised-button class="btn btn-primary" routerLink= "/list">Back</button>
+			<button type = "submit" (click) = "submitTraduction(traduction.value)" [disabled] = "createForm.pristine || createForm.invalid" mat-raised-button class="btn btn-success">Submit</button>
+		</form>
+</div>

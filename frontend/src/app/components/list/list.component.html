@@ -1,0 +1,66 @@
+<!-- Il faut ici afficher les notes de frais de l'utilisateur actuellement connecté, on choisit d'afficher toutes les infomations sauf l'objection de l'user pour ne pas encombrer. 
+-->
+<!-- Lorsque l'utilisateur est sur un petit écran, seules les infos très importantes ( le titre et le status ) s'affiche, le reste ne se voit pas et reste modifiable dans edit -->
+
+<div class="container">
+	<br>
+	<mat-card >
+		<button mat-raised-button class= 'btn btn-primary' routerLink = '/create'> Créer une nouvelle note de frais</button>
+		<button mat-raised-button class= 'btn btn-danger' (click)= 'disconnect()'> Se déconnecter</button>
+		<br><br>
+		<form [formGroup] = "createForm" class = "create-form">
+			<input matInput placeholder="Rechercher par le titre" formControlName="title" #title>
+			<button type = "submit" (click) = "searchByTitle(title.value)" [disabled] = "createForm.pristine || createForm.invalid" mat-raised-button class = 'btn btn-success'>Chercher</button>
+		</form>
+		<button (click) = "initialize()" mat-raised-button class ='btn btn-info'>Réinitialiser</button>
+		<mat-divider></mat-divider>
+		<br>
+		<table mat-table [dataSource] = "issues" >
+			<ng-container matColumnDef = "title" >
+				<th mat-header-cell *matHeaderCellDef class = "cell-header"> Titre </th>
+				<td mat-cell *matCellDef = "let element" class = 'col-md-1 col-sm-4'> {{element.title}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef = "date">
+				<th mat-header-cell *matHeaderCellDef class = "cell-header hidden-sm hidden-xs "> Date </th>
+				<td mat-cell *matCellDef = "let element" class = 'col-md-1  hidden-xs hidden-sm'> {{element.date}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef = "ammount">
+				<th mat-header-cell *matHeaderCellDef class = "cell-header hidden-xs hidden-sm"> Montant </th>
+				<td mat-cell *matCellDef = "let element" class = 'col-md-1 hidden-xs hidden-sm'> {{element.ammount}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef = "devise">
+				<th mat-header-cell *matHeaderCellDef class = "cell-header hidden-xs hidden-sm"> Devise </th>
+				<td mat-cell *matCellDef = "let element" class = 'col-md-1 hidden-xs hidden-sm'> {{element.devise}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef = "description" >
+				<th mat-header-cell *matHeaderCellDef class = "cell-header hidden-xs hidden-sm"> Description </th>
+				<td mat-cell *matCellDef = "let element" class = 'col-md-2 hidden-xs hidden-sm'> {{element.description}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef = "status">
+				<th mat-header-cell *matHeaderCellDef class = "cell-header "> Status </th>
+				<td mat-cell *matCellDef = "let element" class = 'col-md-1 col-sm-4'> {{element.status}} </td>
+			</ng-container> 
+
+			<ng-container matColumnDef = "justification">
+				<th mat-header-cell *matHeaderCellDef class = "cell-header hidden-xs hidden-sm"> Justification </th>
+				<td mat-cell *matCellDef = "let element" class = 'col-md-0 hidden-xs hidden-sm'> {{element.justification}} </td>
+			</ng-container> 
+
+			<ng-container matColumnDef = "actions">
+				<th mat-header-cell *matHeaderCellDef class="cell-header "> Actions </th>
+				<td mat-cell *matCellDef = "let element" class="cell-header col-sm-4 col-md-2" > 
+					<button mat-button color='primary' (click)= "editIssue(element._id)" [disabled] = "element.status === 'Validé'" >Edit</button>
+					<button mat-button color='warn' (click)= "deleteIssue(element._id)" [disabled] = "element.status === 'Validé'" >Delete</button>
+				</td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef= "displayedColumns"></tr>
+			<tr mat-row *matRowDef= "let row; columns: displayedColumns;"></tr>	
+		</table>
+	</mat-card>
+</div>

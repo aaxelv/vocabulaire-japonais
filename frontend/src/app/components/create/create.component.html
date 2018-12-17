@@ -1,0 +1,33 @@
+<!-- Il faut ici pouvoir créer les notes de frais pour l'utilisateurs actuellement connectés, seul les champs importants sont choisis par l'user, c'est à dire : titre, date, montant, devise et description. Le reste est automatique ou ne doit pas être remplie dès la création ( comme les objections aux réctions des admins par exemple ) 
+-->
+
+<div class="container">
+	<br>
+	<mat-card>
+		<button mat-raised-button class= 'btn btn-danger' (click)= 'disconnect()'> Disconnect</button>
+		<section class = 'mat-typography'>
+			<h3>Créer un nouveau mot de vocabulaire</h3>
+		</section>
+		<mat-divider></mat-divider>
+		<br>
+		<form [formGroup] = "createForm" class = "create-form">
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="French" formControlName="french" #french>
+			</mat-form-field>
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="Japanese" formControlName="japanese" #japanese>
+			</mat-form-field>
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="Lesson" formControlName="lesson" #lesson>
+			</mat-form-field>			
+			<mat-form-field class = 'field-full-width'>
+				<input matInput placeholder="Memo1" formControlName="memo1" #memo1>
+			</mat-form-field>
+			<mat-divider></mat-divider>
+			<br><br>
+			<button mat-raised-button class="btn btn-primary" routerLink= "/superadmin">Back</button>
+			<button type = "submit" (click) = "addVoc(french.value,japanese.value,lesson.value,memo1.value)" [disabled] = "createForm.pristine || createForm.invalid" mat-raised-button class="btn btn-success">Save
+			</button>	
+		</form>
+	</mat-card>
+</div>
